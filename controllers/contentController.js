@@ -1,20 +1,39 @@
 const Content = require('../models/content');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 exports.createContent = async (req, res) => {
   try {
+    // Extraction du token d'authentification de l'en-tête Authorization
+    const authorizationHeader = req.headers.authorization;
+
+    // Vérifier si le jeton est présent dans l'en-tête Authorization
+    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
+    }
+
+    // Extraire le jeton en supprimant le préfixe "Bearer "
+    const token = authorizationHeader.split(' ')[1];
+
+    // Validation et extraction de l'ID de l'utilisateur à partir du jeton
+    const decodedToken = jwt.verify(token, config.secret);
+    const userId = decodedToken.userId; // Supposons que votre token contient un champ userId
+
+    // Création du contenu avec l'ID de l'utilisateur
     const content = new Content({
-      
       title: req.body.title,
       text: req.body.text,
-      userId: req.body.userId, 
+      userId: userId, // Utilisation de l'ID de l'utilisateur extrait du token
     });
 
+    // Enregistrement du contenu dans la base de données
     const savedContent = await content.save();
     res.json({ message: 'Contenu créé avec succès', content: savedContent });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la création du contenu',errorMessage: error.message });
+    res.status(500).json({ error: 'Erreur lors de la création du contenu', errorMessage: error.message });
   }
 };
+
 
 exports.getAllContent = async (req, res) => {
   try {
