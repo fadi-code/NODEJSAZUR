@@ -3,7 +3,7 @@ module.exports = {
     secret: 'fadi',
     Port : '3000',
     azureStorageAccountName: 'blobnodejs',
-  azureStorageAccountKey: 'DZWcwcb+Suyz/xnlBrLDofVrhP4c0DHWJ8BhHzgoRTR8GjCe1QogYsTVclk/O408B4ZFlMTZH7PJ+AStTIEsNw==',
+  azureStorageAccountKey: 'DefaultEndpointsProtocol=https;AccountName=blobnodejs;AccountKey=DZWcwcb+Suyz/xnlBrLDofVrhP4c0DHWJ8BhHzgoRTR8GjCe1QogYsTVclk/O408B4ZFlMTZH7PJ+AStTIEsNw==;EndpointSuffix=core.windows.net',
   azureContainerName: 'image'
   };
   
