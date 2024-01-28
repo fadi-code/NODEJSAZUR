@@ -1,10 +1,6 @@
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 const Media = require('../models/media');
 const fs = require('fs');
-const config = require('../config');
-const   azureStorageAccountName =config.azureStorageAccountName;
-const azureStorageAccountKey=config.azureStorageAccountKey;
-const azureContainerName=config.azureContainerName;
 
 // Importez vos informations d'identification à partir du fichier de configuration
 const { azureStorageAccountName, azureStorageAccountKey, azureContainerName } = require('../config');
