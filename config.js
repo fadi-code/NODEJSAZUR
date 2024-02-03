@@ -1,5 +1,5 @@
 module.exports = {
-    database: 'mongodb://cosmomongodb:QxDwvlmsH6WffZMWubj5nEe1IxSRl30uRSfeL6UGVZXrZjR0mOwLAIpjCuyd23c321vLjJF6RVjIACDbtW7K3g%3D%3D@cosmomongodb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmomongodb@',
+    database: 'mongodb://social-bd:EvR94PkkhtI8WNgnYdV04qulAkYLK5qmlx1Me6oTdxqV4unmWQF5sNbzFxkgW03I8vb1dZSE5qEBACDbH9TeDw%3D%3D@social-bd.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@social-bd@',
     secret: 'fadi',
     Port : '3000',
     azureStorageAccountName: 'blobnodejs',
