@@ -10,3 +10,5 @@
 # Ignorer les dossiers générés automatiquement
 node_modules/
 dist/
+
+config.js
