@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config'); 
-
 const app = express();
 const port = config.Port;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger.json');
 
 // Middleware
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use('/auth', authenticationRoutes);
 app.use('/content', contentRoutes);
 app.use('/media', mediaRoutes);
 app.use('/comment', commentRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Démarrer le serveur
 app.listen(port, () => {
