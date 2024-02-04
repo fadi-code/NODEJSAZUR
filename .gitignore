@@ -1,12 +1,22 @@
-# Ignorer les fichiers temporaires
-*~
+# Ignore les fichiers et dossiers générés par npm
+node_modules/
+npm-debug.log
 
-# Ignorer les fichiers de log
+# Ignore les fichiers de configuration spécifiques à l'IDE
+.vscode/
+.idea/
+
+# Ignore les fichiers de build
+dist/
+build/
+
+# Ignore les fichiers de logs
+logs/
 *.log
 
-# Ignorer les fichiers de configuration locaux
-.env
+# Ignore les fichiers de sauvegarde
+*.bak
+*.swp
 
-# Ignorer les dossiers générés automatiquement
-node_modules/
-dist/
+# Ignore le fichier de configuration
+config.js
