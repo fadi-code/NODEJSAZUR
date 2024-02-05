@@ -24,4 +24,8 @@ az logout
 
 
 
-#APIMANAGMENT_CACHE_AUTH_BLOB_BDD_GIT(azur devops)
+#--------------------------------------------------------------------------------
+#push image docker vers azur 
+docker login containerDockernodejs
+docker tag mynodeapp containerdockernodejs.azurecr.io/mynodeapp
+docker push containerDockernodejs.azurecr.io/mynodeapp:latest
