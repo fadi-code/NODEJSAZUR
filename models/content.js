@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
     idcontent: mongoose.Schema.Types.ObjectId,
     title: { type: String, required: true },
     text: { type: String, required: true },
-    userId: { type: String, required: true }
+    userId: { type: String, required: true },
+    mediaId: { type: mongoose.Schema.Types.ObjectId, ref: 'Media', required: true }
 
   });
   

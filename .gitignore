@@ -19,4 +19,3 @@ logs/
 *.swp
 
 # Ignore le fichier de configuration
-config.js

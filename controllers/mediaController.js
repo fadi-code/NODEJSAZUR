@@ -15,7 +15,7 @@ exports.uploadMedia = async (req, res) => {
 
     const sharedKeyCredential = new StorageSharedKeyCredential(azureStorageAccountName, azureStorageAccountKey);
     const blobServiceClient = new BlobServiceClient(`https://${azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
-    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const containerClient = blobServiceClient.getContainerClient(azureContainerName);
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
     // Chargez le fichier dans le conteneur Blob
@@ -50,3 +50,10 @@ exports.getAllMedia = async (req, res) => {
 
 
 
+exports.getMedia = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la récupération des fichiers média' });
+  }
+};

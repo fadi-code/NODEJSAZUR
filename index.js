@@ -35,6 +35,7 @@ app.use('/content', contentRoutes);
 app.use('/media', mediaRoutes);
 app.use('/comment', commentRoutes);
 app.use('/user', userRoutes);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 

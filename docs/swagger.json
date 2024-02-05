@@ -11,8 +11,14 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "user",
+      "description": ""
+    }
+  ],
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {},
   "consumes": [
@@ -198,13 +204,31 @@
         }
       }
     },
-    "/media/all": {
+    "/media/medias": {
       "get": {
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
           },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/media/media/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
           "500": {
             "description": "Internal Server Error"
           }
@@ -252,6 +276,19 @@
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/users": {
+      "get": {
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
