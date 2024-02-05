@@ -59,4 +59,4 @@ jobs:
           app-name: 'APISURAZURVFINAL'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_018B08C086BC477C9429B545AD8733B1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E4CFE4A50A0640D2B28CF8E92790DA9F }}
