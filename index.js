@@ -39,8 +39,14 @@ app.use('/user', userRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
+app.get('/', (req, res) => {
+  res.send(true);
+});
+
+
 
 // Démarrer le serveur
 app.listen(port, () => {
   console.log(`Serveur en cours d'écoute sur http://localhost:${port}`);
 });
+
