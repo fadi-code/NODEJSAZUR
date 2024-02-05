@@ -10,7 +10,7 @@ exports.createContent = async (req, res) => {
     // Vérifier si le jeton est présent dans l'en-tête Authorization
     if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
       return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
-    }
+    } 
 
     // Extraire le jeton en supprimant le préfixe "Bearer "
     const token = authorizationHeader.split(' ')[1];
