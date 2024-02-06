@@ -18,5 +18,4 @@ logs/
 *.bak
 *.swp
 
-config.js
-configJSON.json
+
