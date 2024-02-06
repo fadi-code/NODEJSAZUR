@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 //const config = require('../config');
+require('dotenv').config();
+
 
 // Fonction pour ajouter un commentaire à un contenu
 exports.getAllUsers = async (req, res) => {

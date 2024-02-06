@@ -1,6 +1,7 @@
 const Content = require('../models/content');
 const jwt = require('jsonwebtoken');
 //const config = require('../config');
+require('dotenv').config();
 
 exports.createContent = async (req, res) => {
   try {

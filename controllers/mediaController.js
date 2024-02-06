@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // Importez vos informations d'identification à partir du fichier de configuration
 //const { azureStorageAccountName, azureStorageAccountKey, azureContainerName } = require('../config');
+require('dotenv').config();
 
 
 // Contrôleur pour télécharger un média sur Azure Blob Storage

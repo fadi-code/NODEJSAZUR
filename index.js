@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 //const config = require('./config'); 
 const app = express();
-const port = process.env.Port;
+const port = process.env.PORT || 8080;
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swagger.json');
+require('dotenv').config();
+
 
 // Middleware
 app.use(bodyParser.json());
