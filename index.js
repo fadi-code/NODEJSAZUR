@@ -2,9 +2,9 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('./config'); 
+//const config = require('./config'); 
 const app = express();
-const port = config.Port;
+const port = process.env.Port;
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swagger.json');
 
@@ -15,7 +15,7 @@ app.use(fileUpload());
 
 
 // Database Connection
-mongoose.connect(config.database);
+mongoose.connect(process.env.database);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur de connexion à la base de données :'));
 db.once('open', () => {

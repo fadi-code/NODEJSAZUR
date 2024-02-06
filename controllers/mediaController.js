@@ -3,7 +3,7 @@ const Media = require('../models/media');
 const mongoose = require('mongoose');
 
 // Importez vos informations d'identification à partir du fichier de configuration
-const { azureStorageAccountName, azureStorageAccountKey, azureContainerName } = require('../config');
+//const { azureStorageAccountName, azureStorageAccountKey, azureContainerName } = require('../config');
 
 
 // Contrôleur pour télécharger un média sur Azure Blob Storage
@@ -13,8 +13,8 @@ exports.uploadMedia = async (req, res) => {
     let file = req.files.file;
     const blobName = `${Date.now()}-${file.name}`;
 
-    const sharedKeyCredential = new StorageSharedKeyCredential(azureStorageAccountName, azureStorageAccountKey);
-    const blobServiceClient = new BlobServiceClient(`https://${azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
+    const sharedKeyCredential = new StorageSharedKeyCredential(process.env.azureStorageAccountName, process.env.azureStorageAccountKey);
+    const blobServiceClient = new BlobServiceClient(`https://${process.env.azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 

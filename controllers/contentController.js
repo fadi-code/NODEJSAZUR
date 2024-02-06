@@ -1,6 +1,6 @@
 const Content = require('../models/content');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+//const config = require('../config');
 
 exports.createContent = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ exports.createContent = async (req, res) => {
     const token = authorizationHeader.split(' ')[1];
 
     // Validation et extraction de l'ID de l'utilisateur et du statut d'administrateur à partir du jeton
-    const decodedToken = jwt.verify(token, config.secret);
+    const decodedToken = jwt.verify(token, process.env.secret);
     const userId1 = decodedToken.userId; // Supposons que votre token contient un champ userId
     
 

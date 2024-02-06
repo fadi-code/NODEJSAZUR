@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+//const config = require('../config');
 
 // Fonction pour ajouter un commentaire à un contenu
 exports.getAllUsers = async (req, res) => {
@@ -21,7 +21,7 @@ exports.updateUser = async (req, res) => {
         }
         
         const token = authHeader.split(' ')[1]; // Extraire le token JWT après le préfixe "Bearer"
-        const decodedToken = jwt.verify(token, config.secret); // Décoder le token JWT
+        const decodedToken = jwt.verify(token, process.env.secret); // Décoder le token JWT
         const userId = decodedToken.userId; // Extraire l'ID utilisateur du token JWT
         
         const updates = req.body; // Récupérer les mises à jour des informations de l'utilisateur depuis le corps de la requête
@@ -51,7 +51,7 @@ exports.deleteUser = async (req, res) => {
         }
         
         const token = authHeader.split(' ')[1]; // Extraire le token JWT après le préfixe "Bearer"
-        const decodedToken = jwt.verify(token, config.secret); // Décoder le token JWT
+        const decodedToken = jwt.verify(token, process.env.secret); // Décoder le token JWT
         const isAdmin = decodedToken.admin; // Vérifier si l'utilisateur est un administrateur
         if (!isAdmin) {
             return res.status(403).json({ error: 'Accès refusé. Seuls les administrateurs peuvent supprimer des utilisateurs.' });
