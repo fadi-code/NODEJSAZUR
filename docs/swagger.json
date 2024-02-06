@@ -6,10 +6,10 @@
     "description": "API for Managing Social APP",
     "contact": {
       "name": "API Support",
-      "email": "modeste.kouassi@supinfo.com"
+      "email": "djelouah.fadi@supinfo.com"
     }
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
     "http"

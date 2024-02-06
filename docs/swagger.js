@@ -17,10 +17,10 @@ const doc = {
     description: 'API for Managing Social APP',  // by default: ''
     contact: {
         'name': 'API Support',
-        'email': 'modeste.kouassi@supinfo.com'
+        'email': 'djelouah.fadi@supinfo.com'
     },
   },
-  host: 'localhost:3000',
+  host: 'localhost:8080',
   basePath: '/',  // by default: '/'
   schemes: ['http'],   // by default: ['http']
   consumes: ['application/json'],  // by default: ['application/json']
