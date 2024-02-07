@@ -1,10 +1,16 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+//const config = require('../config');
+require('dotenv').config();
 const User = require('../models/user');
+const validator = require('validator');
 
 exports.register = async (req, res) => {
   try {
+    if (!validator.isEmail(req.body.email)) {
+      return res.status(400).json({ error: 'Adresse e-mail invalide.' });
+    }
+
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(400).json({ error: 'Cet e-mail est déjà utilisé.' });
@@ -16,6 +22,7 @@ exports.register = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      admin: req.body.admin
     });
 
     const savedUser = await newUser.save();
@@ -25,6 +32,7 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de l\'inscription' });
   }
 };
+
 
 exports.login = async (req, res) => {
   try {
@@ -38,7 +46,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: 'Mot de passe incorrect.' });
     }
 
-    const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, admin: user.admin  }, process.env.secret, { expiresIn: '1h' });
 res.header('Authorization', 'Bearer ' + token).json({ message: 'Connexion réussie' });
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la connexion' });

@@ -25,3 +25,32 @@ exports.getCommentsByContentId = async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des commentaires' });
   }
 };
+exports.deleteCommentsByUserId = async (req, res) => {
+  try {
+    const authorizationHeader = req.headers.authorization;
+    
+    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
+    }
+
+    const token = authorizationHeader.split(' ')[1];
+
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.secret);
+    } catch (error) {
+      return res.status(401).json({ error: 'Token d\'authentification invalide' });
+    }
+
+    const userId = decodedToken.userId;
+    
+    const commentsToDelete = await Comment.find({ userId: userId });
+
+    await Comment.deleteMany({ userId: userId });
+
+    res.json({ message: 'Commentaires supprimés avec succès' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la suppression des commentaires' });
+  }
+};
+

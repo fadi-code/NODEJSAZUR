@@ -18,4 +18,5 @@ logs/
 *.bak
 *.swp
 
-# Ignore le fichier de configuration
+.env
+

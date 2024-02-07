@@ -2,11 +2,17 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('./config'); 
+//const config = require('./config'); 
 const app = express();
+<<<<<<< HEAD
 const port = 8080;
+=======
+const port = process.env.PORT || 8080;
+>>>>>>> upstream/modeste
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swagger.json');
+require('dotenv').config();
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -15,12 +21,13 @@ app.use(fileUpload());
 
 
 // Database Connection
-mongoose.connect(config.database);
+mongoose.connect(process.env.database);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur de connexion à la base de données :'));
 db.once('open', () => {
-  console.log('Connecté à la base de données');
+  console.log('Connecté à la base de données MongoDB');
 });
+
 
 // Routes
 const authenticationRoutes = require('./routes/authenticationRoutes'); // Chemin vers les routes d'authentification

@@ -6,10 +6,10 @@
     "description": "API for Managing Social APP",
     "contact": {
       "name": "API Support",
-      "email": "modeste.kouassi@supinfo.com"
+      "email": "djelouah.fadi@supinfo.com"
     }
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [
     {
@@ -45,6 +45,9 @@
                   "example": "any"
                 },
                 "username": {
+                  "example": "any"
+                },
+                "admin": {
                   "example": "any"
                 }
               }
@@ -194,9 +197,19 @@
     "/media/upload": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -217,6 +230,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "/media/media/{id}": {
       "get": {
         "description": "",
@@ -225,10 +239,28 @@
             "name": "id",
             "in": "path",
             "required": true,
+=======
+    "/media/delete": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+>>>>>>> upstream/modeste
             "type": "string"
           }
         ],
         "responses": {
+<<<<<<< HEAD
+=======
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+>>>>>>> upstream/modeste
           "500": {
             "description": "Internal Server Error"
           }
@@ -265,7 +297,7 @@
         }
       }
     },
-    "/comment/content/{contentId}": {
+    "/comment/{contentId}": {
       "get": {
         "description": "",
         "parameters": [
@@ -286,7 +318,34 @@
         }
       }
     },
+<<<<<<< HEAD
     "/user/users": {
+=======
+    "/comment/delete": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/allusers": {
+>>>>>>> upstream/modeste
       "get": {
         "description": "",
         "responses": {
@@ -298,6 +357,91 @@
           }
         }
       }
+<<<<<<< HEAD
+=======
+    },
+    "/user/modif": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/delete": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+>>>>>>> upstream/modeste
     }
   }
 }

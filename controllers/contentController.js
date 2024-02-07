@@ -1,6 +1,7 @@
 const Content = require('../models/content');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+//const config = require('../config');
+require('dotenv').config();
 
 exports.createContent = async (req, res) => {
   try {
@@ -15,24 +16,30 @@ exports.createContent = async (req, res) => {
     // Extraire le jeton en supprimant le préfixe "Bearer "
     const token = authorizationHeader.split(' ')[1];
 
-    // Validation et extraction de l'ID de l'utilisateur à partir du jeton
-    const decodedToken = jwt.verify(token, config.secret);
-    const userId = decodedToken.userId; // Supposons que votre token contient un champ userId
+    // Validation et extraction de l'ID de l'utilisateur et du statut d'administrateur à partir du jeton
+    const decodedToken = jwt.verify(token, process.env.secret);
+    const userId1 = decodedToken.userId; // Supposons que votre token contient un champ userId
+    
 
     // Création du contenu avec l'ID de l'utilisateur
     const content = new Content({
       title: req.body.title,
       text: req.body.text,
-      userId: userId, // Utilisation de l'ID de l'utilisateur extrait du token
+      userId: userId1, // Utilisation de l'ID de l'utilisateur extrait du token
     });
 
-    // Enregistrement du contenu dans la base de données
+    // Sauvegarde du contenu dans la base de données
     const savedContent = await content.save();
+
+    // Envoyer une réponse réussie avec le contenu créé
     res.json({ message: 'Contenu créé avec succès', content: savedContent });
   } catch (error) {
+    // Gestion des erreurs et envoi d'une réponse d'erreur
+    console.error('Erreur lors de la création du contenu:', error);
     res.status(500).json({ error: 'Erreur lors de la création du contenu', errorMessage: error.message });
   }
 };
+
 
 
 exports.getAllContent = async (req, res) => {
