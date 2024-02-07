@@ -9,7 +9,7 @@
       "email": "djelouah.fadi@supinfo.com"
     }
   },
-  "host": "https://apisurazurvfinal.azurewebsites.net",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
     "http"
@@ -181,7 +181,7 @@
                 "text": {
                   "example": "any"
                 },
-                "contentId": {
+                "PubId": {
                   "example": "any"
                 }
               }
@@ -198,12 +198,12 @@
         }
       }
     },
-    "/comment/{contentId}": {
+    "/comment/{PubId}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "contentId",
+            "name": "PubId",
             "in": "path",
             "required": true,
             "type": "string"
