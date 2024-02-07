@@ -4,11 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 //const config = require('./config'); 
 const app = express();
-<<<<<<< HEAD
-const port = 8080;
-=======
 const port = process.env.PORT || 8080;
->>>>>>> upstream/modeste
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swagger.json');
 require('dotenv').config();
