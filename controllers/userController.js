@@ -2,6 +2,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 //const config = require('../config');
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 
 
 // Fonction pour ajouter un commentaire à un contenu
@@ -13,6 +14,7 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ error: 'Failed to get users' });
     }
 };
+
 
 
 exports.updateUser = async (req, res) => {
@@ -27,6 +29,14 @@ exports.updateUser = async (req, res) => {
         const userId = decodedToken.userId; // Extraire l'ID utilisateur du token JWT
         
         const updates = req.body; // Récupérer les mises à jour des informations de l'utilisateur depuis le corps de la requête
+
+        // Vérifier si le mot de passe fait partie des mises à jour
+        if (updates.password) {
+            // Hacher le nouveau mot de passe
+            const hashedPassword = await bcrypt.hash(updates.password, 10);
+            // Mettre à jour le mot de passe dans les mises à jour
+            updates.password = hashedPassword;
+        }
 
         // Mettre à jour les informations de l'utilisateur dans la base de données
         const updatedUser = await User.findByIdAndUpdate(userId, updates, { new: true });
@@ -44,6 +54,7 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ error: 'Erreur lors de la mise à jour des informations utilisateur', errorMessage: error.message });
     }
 };
+
 
 exports.deleteUser = async (req, res) => {
     try {
