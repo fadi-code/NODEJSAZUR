@@ -14,15 +14,9 @@ exports.uploadMedia = async (req, res) => {
     let file = req.files.file;
     const blobName = `${Date.now()}-${file.name}`;
 
-<<<<<<< HEAD
-    const sharedKeyCredential = new StorageSharedKeyCredential(azureStorageAccountName, azureStorageAccountKey);
-    const blobServiceClient = new BlobServiceClient(`https://${azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
-    const containerClient = blobServiceClient.getContainerClient(azureContainerName);
-=======
     const sharedKeyCredential = new StorageSharedKeyCredential(process.env.azureStorageAccountName, process.env.azureStorageAccountKey);
     const blobServiceClient = new BlobServiceClient(`https://${process.env.azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
     const containerClient = blobServiceClient.getContainerClient(containerName);
->>>>>>> upstream/modeste
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
     // Chargez le fichier dans le conteneur Blob
