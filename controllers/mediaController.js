@@ -24,11 +24,23 @@ exports.uploadMedia = async (req, res) => {
       blobHTTPHeaders: { blobContentType: file.mimetype } 
     });
 
-    // Enregistrez les informations du média dans la base de données
-    const uploader = new mongoose.Types.ObjectId(req.user);
+    const authorizationHeader = req.headers.authorization;
+
+    // Vérifier si le jeton est présent dans l'en-tête Authorization
+    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
+    }
+
+    // Extraire le jeton en supprimant le préfixe "Bearer "
+    const token = authorizationHeader.split(' ')[1];
+
+    // Validation et extraction de l'ID de l'utilisateur et du statut d'administrateur à partir du jeton
+    const decodedToken = jwt.verify(token, process.env.secret);
+    const userId1 = decodedToken.userId; // Supposons que votre token contient un champ userId
+    
     const media = new Media({
       filename: blobName,
-      uploaderId: uploader, // Supposons que vous stockez l'ID de l'utilisateur dans req.userId
+      uploaderId: userId1, 
       url: blockBlobClient.url
     });
 
