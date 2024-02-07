@@ -230,16 +230,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "/media/media/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-=======
     "/media/delete": {
       "delete": {
         "description": "",
@@ -247,20 +237,16 @@
           {
             "name": "authorization",
             "in": "header",
->>>>>>> upstream/modeste
             "type": "string"
           }
         ],
         "responses": {
-<<<<<<< HEAD
-=======
           "200": {
             "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
           },
->>>>>>> upstream/modeste
           "500": {
             "description": "Internal Server Error"
           }
@@ -318,9 +304,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "/user/users": {
-=======
     "/comment/delete": {
       "delete": {
         "description": "",
@@ -345,7 +328,6 @@
       }
     },
     "/user/allusers": {
->>>>>>> upstream/modeste
       "get": {
         "description": "",
         "responses": {
@@ -357,8 +339,6 @@
           }
         }
       }
-<<<<<<< HEAD
-=======
     },
     "/user/modif": {
       "put": {
@@ -441,7 +421,6 @@
           }
         }
       }
->>>>>>> upstream/modeste
     }
   }
 }
