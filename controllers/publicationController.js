@@ -55,7 +55,7 @@ exports.uploadPub = async (req, res) => {
 // Contrôleur pour obtenir tous les médias depuis la base de données
 exports.getAllPub = async (req, res) => {
   try {
-    const allPublications = await Publication.find({}, { _id: 0, __v: 0 }); // Exclut _id et __v
+    const allPublications = await Publication.find({}, {  __v: 0 }); // Exclut _id et __v
     
     res.json(allPublications);
   } catch (error) {

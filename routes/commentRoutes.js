@@ -6,7 +6,7 @@ const commentController = require('../controllers/commentController');
 router.post('/add', commentController.addComment);
 
 // Endpoint pour récupérer tous les commentaires d'un contenu
-router.get('/:PubId', commentController.getCommentsByContentId);
+router.get('/:PubId', commentController.getCommentsByPubtId);
 
 router.delete('/delete', commentController.deleteCommentsByUserId);
 
