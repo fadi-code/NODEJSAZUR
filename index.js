@@ -21,8 +21,9 @@ mongoose.connect(process.env.database);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur de connexion à la base de données :'));
 db.once('open', () => {
-  console.log('Connecté à la base de données');
+  console.log('Connecté à la base de données MongoDB');
 });
+
 
 // Routes
 const authenticationRoutes = require('./routes/authenticationRoutes'); // Chemin vers les routes d'authentification
