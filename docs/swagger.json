@@ -9,7 +9,7 @@
       "email": "djelouah.fadi@supinfo.com"
     }
   },
-  "host": "localhost:8080",
+  "host": "https://apisurazurvfinal.azurewebsites.net",
   "basePath": "/",
   "schemes": [
     "http"
