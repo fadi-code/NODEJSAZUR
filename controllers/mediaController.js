@@ -61,6 +61,45 @@ exports.getAllMedia = async (req, res) => {
   }
 };
 
+// Contrôleur pour supprimer un média par ID utilisateur
+exports.deleteMediaByUserId = async (req, res) => {
+  try {
+    const authorizationHeader = req.headers.authorization;
+
+    // Vérifier si le jeton est présent dans l'en-tête Authorization
+    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
+    }
+
+    // Extraire le jeton en supprimant le préfixe "Bearer "
+    const token = authorizationHeader.split(' ')[1];
+
+    // Validation et extraction de l'ID de l'utilisateur et du statut d'administrateur à partir du jeton
+    const decodedToken = jwt.verify(token, process.env.secret);
+    const userId1 = decodedToken.userId; //  token contient un champ userId
+
+    // Recherchez les médias téléchargés par cet utilisateur
+    const mediaToDelete = await Media.find({ uploaderId: userId1 });
+
+    // Supprimez les médias de la base de données
+    await Media.deleteMany({ uploaderId: userId1 });
+
+    // Supprimez les fichiers correspondants dans Azure Blob Storage
+    const sharedKeyCredential = new StorageSharedKeyCredential(process.env.azureStorageAccountName, process.env.azureStorageAccountKey);
+    const blobServiceClient = new BlobServiceClient(`https://${process.env.azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
+    
+    for (const media of mediaToDelete) {
+      const blobClient = blobServiceClient.getBlobClient(media.filename);
+      await blobClient.delete();
+    }
+
+    res.json({ message: 'Médias supprimés avec succès' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la suppression des médias' });
+  }
+};
+
+
 
 
 
