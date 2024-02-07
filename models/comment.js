@@ -4,7 +4,7 @@ const commentSchema = new mongoose.Schema({
 
   idcomment: mongoose.Schema.Types.ObjectId,
   text: { type: String, required: true },
-  contentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Content', required: true }
+  PubId: { type: mongoose.Schema.Types.ObjectId, ref: 'Publication', required: true }
 
   
 });

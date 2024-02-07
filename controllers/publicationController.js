@@ -55,21 +55,14 @@ exports.uploadPub = async (req, res) => {
 // Contrôleur pour obtenir tous les médias depuis la base de données
 exports.getAllPub = async (req, res) => {
   try {
-    const allPublications = await Publication.find(); // Utilisez le modèle de publication
+    const allPublications = await Publication.find({}, { _id: 0, __v: 0 }); // Exclut _id et __v
     
-    // Mettre en gras le titre de chaque publication
-    const formattedPublications = allPublications.map(publication => {
-      return {
-        ...publication._doc,
-        title: `publication.title`
-      };
-    });
-
-    res.json(formattedPublications);
+    res.json(allPublications);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération des publications' });
   }
 };
+
 
 
 // Contrôleur pour supprimer un média par ID utilisateur

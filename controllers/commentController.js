@@ -6,7 +6,7 @@ exports.addComment = async (req, res) => {
     const comment = new Comment({
       
       text: req.body.text,
-      contentId: req.body.contentId,
+      PubIdtId: req.body.PubId,
     });
 
     const savedComment = await comment.save();
@@ -19,7 +19,7 @@ exports.addComment = async (req, res) => {
 // Fonction pour récupérer tous les commentaires d'un contenu
 exports.getCommentsByContentId = async (req, res) => {
   try {
-    const comments = await Comment.find({ contentId: req.params.contentId });
+    const comments = await Comment.find({ PubId: req.params.PubId });
     res.json(comments);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération des commentaires' });
