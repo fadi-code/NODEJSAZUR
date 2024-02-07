@@ -65,7 +65,7 @@ exports.getAllMedia = async (req, res) => {
 exports.deleteMediaByUserId = async (req, res) => {
   try {
     const authorizationHeader = req.headers.authorization;
-
+    
     // Vérifier si le jeton est présent dans l'en-tête Authorization
     if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
       return res.status(401).json({ error: 'Token d\'authentification manquant ou invalide' });
