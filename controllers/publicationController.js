@@ -61,7 +61,7 @@ exports.getAllPub = async (req, res) => {
     const formattedPublications = allPublications.map(publication => {
       return {
         ...publication._doc,
-        title: `<strong>${publication.title}</strong>`
+        title: `publication.title`
       };
     });
 
