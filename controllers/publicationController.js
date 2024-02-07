@@ -51,15 +51,26 @@ exports.uploadPub = async (req, res) => {
   }
 };
 
+
 // Contrôleur pour obtenir tous les médias depuis la base de données
 exports.getAllPub = async (req, res) => {
   try {
     const allPublications = await Publication.find(); // Utilisez le modèle de publication
-    res.json(allPublications);
+    
+    // Mettre en gras le titre de chaque publication
+    const formattedPublications = allPublications.map(publication => {
+      return {
+        ...publication._doc,
+        title: `<strong>${publication.title}</strong>`
+      };
+    });
+
+    res.json(formattedPublications);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération des publications' });
   }
 };
+
 
 // Contrôleur pour supprimer un média par ID utilisateur
 exports.deletePubByUserId = async (req, res) => {
