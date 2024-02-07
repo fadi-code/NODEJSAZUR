@@ -3,9 +3,14 @@ const jwt = require('jsonwebtoken');
 //const config = require('../config');
 require('dotenv').config();
 const User = require('../models/user');
+const validator = require('validator');
 
 exports.register = async (req, res) => {
   try {
+    if (!validator.isEmail(req.body.email)) {
+      return res.status(400).json({ error: 'Adresse e-mail invalide.' });
+    }
+
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(400).json({ error: 'Cet e-mail est déjà utilisé.' });
@@ -17,7 +22,7 @@ exports.register = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
-      admin : req.body.admin
+      admin: req.body.admin
     });
 
     const savedUser = await newUser.save();
@@ -27,6 +32,7 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de l\'inscription' });
   }
 };
+
 
 exports.login = async (req, res) => {
   try {
