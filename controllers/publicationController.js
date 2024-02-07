@@ -1,22 +1,20 @@
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
-const Media = require('../models/media');
+const Publication = require('../models/publication'); // Importez le modèle de publication
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken'); // Importez jsonwebtoken
 
 // Importez vos informations d'identification à partir du fichier de configuration
-//const { azureStorageAccountName, azureStorageAccountKey, azureContainerName } = require('../config');
 require('dotenv').config();
 
-
 // Contrôleur pour télécharger un média sur Azure Blob Storage
-exports.uploadMedia = async (req, res) => {
+exports.uploadPub = async (req, res) => {
   try {
-
     let file = req.files.file;
     const blobName = `${Date.now()}-${file.name}`;
 
     const sharedKeyCredential = new StorageSharedKeyCredential(process.env.azureStorageAccountName, process.env.azureStorageAccountKey);
     const blobServiceClient = new BlobServiceClient(`https://${process.env.azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
-    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const containerClient = blobServiceClient.getContainerClient(process.env.azureContainerName); // Utilisez process.env.azureContainerName
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
     // Chargez le fichier dans le conteneur Blob
@@ -38,31 +36,33 @@ exports.uploadMedia = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.secret);
     const userId1 = decodedToken.userId; //  token contient un champ userId
     
-    const media = new Media({
+    const publication = new Publication({
+      title: req.body.title,
+      text: req.body.text,
       filename: blobName,
       uploaderId: userId1, 
       url: blockBlobClient.url
     });
 
-    const savedMedia = await media.save();
-    res.json({ message: 'Fichier média téléchargé avec succès', media: savedMedia });
+    const savedPublication = await publication.save();
+    res.json({ message: 'Fichier média téléchargé avec succès', publication: savedPublication });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 // Contrôleur pour obtenir tous les médias depuis la base de données
-exports.getAllMedia = async (req, res) => {
+exports.getAllPub = async (req, res) => {
   try {
-    const allMedia = await Media.find();
-    res.json(allMedia);
+    const allPublications = await Publication.find(); // Utilisez le modèle de publication
+    res.json(allPublications);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des fichiers média' });
+    res.status(500).json({ error: 'Erreur lors de la récupération des publications' });
   }
 };
 
 // Contrôleur pour supprimer un média par ID utilisateur
-exports.deleteMediaByUserId = async (req, res) => {
+exports.deletePubByUserId = async (req, res) => {
   try {
     const authorizationHeader = req.headers.authorization;
     
@@ -79,27 +79,22 @@ exports.deleteMediaByUserId = async (req, res) => {
     const userId1 = decodedToken.userId; //  token contient un champ userId
 
     // Recherchez les médias téléchargés par cet utilisateur
-    const mediaToDelete = await Media.find({ uploaderId: userId1 });
+    const publicationsToDelete = await Publication.find({ uploaderId: userId1 });
 
     // Supprimez les médias de la base de données
-    await Media.deleteMany({ uploaderId: userId1 });
+    await Publication.deleteMany({ uploaderId: userId1 });
 
     // Supprimez les fichiers correspondants dans Azure Blob Storage
     const sharedKeyCredential = new StorageSharedKeyCredential(process.env.azureStorageAccountName, process.env.azureStorageAccountKey);
     const blobServiceClient = new BlobServiceClient(`https://${process.env.azureStorageAccountName}.blob.core.windows.net`, sharedKeyCredential);
     
-    for (const media of mediaToDelete) {
-      const blobClient = blobServiceClient.getBlobClient(media.filename);
+    for (const publication of publicationsToDelete) {
+      const blobClient = blobServiceClient.getBlobClient(publication.filename);
       await blobClient.delete();
     }
 
-    res.json({ message: 'Médias supprimés avec succès' });
+    res.json({ message: 'Publications supprimées avec succès' });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la suppression des médias' });
+    res.status(500).json({ error: 'Erreur lors de la suppression des publications' });
   }
 };
-
-
-
-
-

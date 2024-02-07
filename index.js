@@ -26,15 +26,13 @@ db.once('open', () => {
 
 // Routes
 const authenticationRoutes = require('./routes/authenticationRoutes'); // Chemin vers les routes d'authentification
-const contentRoutes = require('./routes/contentRoutes'); // Chemin vers les routes de contenu
-const mediaRoutes = require('./routes/mediaRoutes'); // Chemin vers les routes de média
+const publicationRoutesRoutes = require('./routes/publicationRoutes'); // Chemin vers les routes de média
 const commentRoutes = require('./routes/commentRoutes'); // Chemin vers les routes de commentaires
 const userRoutes = require('./routes/userRoutes'); // Chemin vers les routes de user
 
 
 app.use('/auth', authenticationRoutes);
-app.use('/content', contentRoutes);
-app.use('/media', mediaRoutes);
+app.use('/pub', publicationRoutesRoutes);
 app.use('/comment', commentRoutes);
 app.use('/user', userRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
