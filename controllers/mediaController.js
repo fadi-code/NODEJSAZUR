@@ -36,7 +36,7 @@ exports.uploadMedia = async (req, res) => {
 
     // Validation et extraction de l'ID de l'utilisateur et du statut d'administrateur à partir du jeton
     const decodedToken = jwt.verify(token, process.env.secret);
-    const userId1 = decodedToken.userId; // Supposons que votre token contient un champ userId
+    const userId1 = decodedToken.userId; //  token contient un champ userId
     
     const media = new Media({
       filename: blobName,
