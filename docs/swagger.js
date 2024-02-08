@@ -20,7 +20,7 @@ const doc = {
         'email': 'djelouah.fadi@supinfo.com'
     },
   },
-  host: 'localhost:8080',
+  host: 'https://apisurazurvfinal.azurewebsites.net',
   basePath: '/',  // by default: '/'
   schemes: ['http'],   // by default: ['http']
   consumes: ['application/json'],  // by default: ['application/json']
