@@ -1,4 +1,8 @@
-# SOCIAL API
+
+# Social Media Platform Project with Azure
+
+This project was carried out as part of the Developing Solutions for Microsoft Azure course, utilizing Azure services. We developed a social media platform enabling content creation and management via APIs. Our platform primarily focuses on the backend aspect for social networks.
+
 
 
 ## Usage
@@ -20,9 +24,6 @@ node index
 
 ```
 
-# Social Media Platform Project with Azure
-
-This project was carried out as part of the Developing Solutions for Microsoft Azure course, utilizing Azure services. We developed a social media platform enabling content creation and management via APIs. Our platform primarily focuses on the backend aspect for social networks.
 
 ## Platform Architecture
 
